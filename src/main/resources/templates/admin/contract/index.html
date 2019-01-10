@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="zh">
+<head th:replace="~{admin/partial/head :: head}"></head>
+
+<body>
+<div id="wrapper">
+    <nav class="navbar-default navbar-static-side" role="navigation" th:insert="~{admin/partial/sidebar :: sidebar}">
+    </nav>
+
+    <div id="page-wrapper" class="gray-bg dashbard-1">
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-10">
+                <h2>功能列表</h2>
+                <ol class="breadcrumb">
+                    <li>
+                        <a href="/admin/home">主页</a>
+                    </li>
+                    <li>
+                        <a>功能管理</a>
+                    </li>
+                    <li>
+                        <strong>功能列表</strong>
+                    </li>
+                </ol>
+            </div>
+            <div class="col-lg-2">
+
+            </div>
+        </div>
+
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="panel panel-headline">
+                <div class="panel-heading">
+                    <h2 class="panel-title">上传报表</h2>
+                </div>
+                <div class="panel-body">
+                    <form action="/admin/contract/uploadExcel" method="post" enctype="multipart/form-data"
+                          onsubmit="return check();">
+                        <div style="margin: 30px;">
+                            <input id="excel_file" class="btn btn-primary" type="file" name="filename" accept="xlsx"
+                                   size="80"/>
+                            <br/>
+                            <input id="excel_button" class="btn btn-primary" type="submit" value="导入Excel"/>
+                        </div>
+
+                        <input type="hidden"/>
+                    </form>
+                </div>
+            </div>
+            <div class="panel panel-headline">
+                <div class="panel-heading">
+                    <h2 class="panel-title">下载模板</h2>
+                </div>
+                <div class="panel-body">
+                    <form action="/admin/contract/downloadTemplate">
+                        <div style="margin: 30px;">
+                            <input id="excel_download" class="btn btn-primary " type="submit" value="下载Excel模板"/>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--添加footer-->
+    <div class="footer fixed" th:insert="~{admin/partial/footer :: copyright}">
+
+    </div>
+</div>
+
+<!-- 修改用户信息 -->
+<div class="modal inmodal" id="addContractModal" tabindex="-1" role="dialog" aria-hidden="true"
+     th:replace="admin/partial/module-userinfo :: update-modal"></div>
+
+<div class="container" id="crop-avatar" th:replace="~{admin/partial/avatar :: avatar}"></div>
+
+<!-- Mainly scripts -->
+<script src="/js/jquery.min.js"></script>
+<script src="/admin/js/bootstrap.min.js"></script>
+<script src="/admin/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="/admin/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="/admin/js/validation.js"></script>
+<script src="/admin/js/contract/index.js"></script>
+<!--左边菜单的展开和关闭-->
+<script src="/admin/js/hplus.js"></script>
+<script src="/admin/js/plugins/chosen/chosen.jquery.js"></script>
+<!--弹窗效果-->
+<script type="text/javascript" src="/admin/js/flavr/flavr/js/flavr.min.js"></script>
+<script type="text/javascript" src="/admin/js/flavr/base.js"></script>
+
+<script src="/admin/js/userinfo.js"></script>
+<script src="/admin/js/cropper.min.js"></script>
+<script src="/admin/js/upload-image.js"></script>
+</body>
+</html>

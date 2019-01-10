@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="zh">
+
+<table class="table table-striped table-bordered table-hover table-condensed dataTables-example">
+    <thead>
+    <tr>
+        <th style="text-align: center; " data-field="contractSignYear">
+            <div class="th-inner ">合同签署年度</div>
+            <div class="fht-cell" style="width: 80px;"></div>
+        </th>
+        <th style="text-align: center; " data-field="itemCoding">
+            <div class="th-inner ">项目编码</div>
+            <div class="fht-cell" style="width: 60px;"></div>
+        </th>
+        <th style="text-align: center; " data-field="salePerson">
+            <div class="th-inner ">销售人员</div>
+            <div class="fht-cell" style="width: 60px;"></div>
+        </th>
+        <th style="text-align: center; " data-field="projectName">
+            <div class="th-inner ">项目名称</div>
+            <div class="fht-cell" style="width: 60px;"></div>
+        </th>
+        <th style="text-align: center; " data-field="contractAmount">
+            <div class="th-inner ">合同额</div>
+            <div class="fht-cell" style="width: 40px;"></div>
+        </th>
+        <th style="text-align: center; " data-field="invoiceAmount2015">
+            <div class="th-inner ">2015年开票金额</div>
+            <div class="fht-cell" style="width: 100px;"></div>
+        </th>
+        <th style="text-align: center; " data-field="recoveredAmount2015">
+            <div class="th-inner ">2015年回款金额</div>
+            <div class="fht-cell" style="width: 100px;"></div>
+        </th>
+        <th style="text-align: center; " data-field="invoiceAmount2016">
+            <div class="th-inner ">2016年开票金额</div>
+            <div class="fht-cell" style="width: 100px;"></div>
+        </th>
+        <th style="text-align: center; " data-field="recoveredAmountDate2016">
+            <div class="th-inner ">2016年回款日期</div>
+            <div class="fht-cell" style="width: 100px;"></div>
+        </th>
+        <th style="text-align: center; " data-field="recoveredAmount2016">
+            <div class="th-inner ">2016年回款金额</div>
+            <div class="fht-cell" style="width: 100px;"></div>
+        </th>
+        <th style="text-align: center; " data-field="invoiceAmount2017">
+            <div class="th-inner ">2017年开票金额</div>
+            <div class="fht-cell" style="width: 100px;"></div>
+        </th>
+        <th style="text-align: center; " data-field="recoveredAmountDate2017">
+            <div class="th-inner ">2017年回款日期</div>
+            <div class="fht-cell" style="width: 100px;"></div>
+        </th>
+        <th style="text-align: center; " data-field="recoveredAmount2017">
+            <div class="th-inner ">2017年回款金额</div>
+            <div class="fht-cell" style="width: 100px;"></div>
+        </th>
+        <th style="text-align: center; " data-field="invoiceAmountDate2018">
+            <div class="th-inner ">2018年开票日期</div>
+            <div class="fht-cell" style="width: 100px;"></div>
+        </th>
+        <th style="text-align: center; " data-field="invoiceAmount2018">
+            <div class="th-inner ">2018年开票金额</div>
+            <div class="fht-cell" style="width: 100px;"></div>
+        </th>
+        <th style="text-align: center; " data-field="recoveredAmountDate2018">
+            <div class="th-inner ">2018年回款日期</div>
+            <div class="fht-cell" style="width: 100px;"></div>
+        </th>
+        <th style="text-align: center; " data-field="recoveredAmount2018">
+            <div class="th-inner ">2018年回款金额</div>
+            <div class="fht-cell" style="width: 100px;"></div>
+        </th>
+        <th style="text-align: center; " data-field="due">
+            <div class="th-inner ">开票应收款</div>
+            <div class="fht-cell" style="width: 70px;"></div>
+        </th>
+        <th style="text-align: center; " data-field="invoiceAmount">
+            <div class="th-inner ">开票合计</div>
+            <div class="fht-cell" style="width: 60px;"></div>
+        </th>
+        <th style="text-align: center; " data-field="unbilledAmount">
+            <div class="th-inner ">未开票金额</div>
+            <div class="fht-cell" style="width: 70px;"></div>
+        </th>
+        <th style="text-align: center; " data-field="receivableTotal">
+            <div class="th-inner ">回款合计</div>
+            <div class="fht-cell" style="width: 60px;"></div>
+        </th>
+        <th style="text-align: center; " data-field="operation">
+            <div class="th-inner ">操作</div>
+            <div class="fht-cell" style="width: 80px;"></div>
+        </th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr class="gradeX" th:each="contract : ${contractList}">
+        <td style="text-align: center; vertical-align: middle!important;" th:text="${contract.contractSignYear}"></td>
+        <td style="text-align: center; vertical-align: middle!important;" th:text="${contract.itemCoding}"></td>
+        <td style="text-align: center; vertical-align: middle!important;" th:text="${contract.salePerson}"></td>
+        <td style="text-align: center; vertical-align: middle!important;" th:text="${contract.projectName}"></td>
+        <td style="text-align: center; vertical-align: middle!important;" th:text="${contract.contractAmount}"></td>
+        <td style="text-align: center; vertical-align: middle!important;" th:text="${contract.invoiceAmount2015}"></td>
+        <td style="text-align: center; vertical-align: middle!important;" th:text="${contract.recoveredAmount2015}"></td>
+        <td style="text-align: center; vertical-align: middle!important;" th:text="${contract.invoiceAmount2016}"></td>
+        <td style="text-align: center; vertical-align: middle!important;" th:text="${contract.recoveredAmountDate2016}"></td>
+        <td style="text-align: center; vertical-align: middle!important;" th:text="${contract.recoveredAmount2016}"></td>
+        <td style="text-align: center; vertical-align: middle!important;" th:text="${contract.invoiceAmount2017}"></td>
+        <td style="text-align: center; vertical-align: middle!important;" th:text="${contract.recoveredAmountDate2017}"></td>
+        <td style="text-align: center; vertical-align: middle!important;" th:text="${contract.recoveredAmount2017}"></td>
+        <td style="text-align: center; vertical-align: middle!important;" th:text="${contract.invoiceAmountDate2018}"></td>
+        <td style="text-align: center; vertical-align: middle!important;" th:text="${contract.invoiceAmount2018}"></td>
+        <td style="text-align: center; vertical-align: middle!important;" th:text="${contract.recoveredAmountDate2018}"></td>
+        <td style="text-align: center; vertical-align: middle!important;" th:text="${contract.recoveredAmount2018}"></td>
+        <td style="text-align: center; vertical-align: middle!important;" th:text="${contract.due}"></td>
+        <td style="text-align: center; vertical-align: middle!important;" th:text="${contract.invoiceAmount}"></td>
+        <td style="text-align: center; vertical-align: middle!important;" th:text="${contract.unbilledAmount}"></td>
+        <td style="text-align: center; vertical-align: middle!important;" th:text="${contract.receivableTotal}"></td>
+        <td style="text-align: center; vertical-align: middle!important;" th:data-id="${contract.contractId}">
+            <button data-toggle="modal" data-target="#contract-updates" class="btn btn-success btn-xs contract-update" type="button" title="修改">
+                修改
+            </button>
+            <button class="btn btn-danger btn-xs contract-delete" type="button" title="删除">
+                删除
+            </button>
+
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</html>

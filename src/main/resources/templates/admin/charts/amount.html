@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="zh">
+<head th:replace="~{admin/partial/head :: head}"></head>
+
+<body>
+<div id="wrapper">
+    <nav class="navbar-default navbar-static-side" role="navigation" th:insert="~{admin/partial/sidebar :: sidebar}">
+    </nav>
+
+    <div id="page-wrapper" class="gray-bg dashbard-1">
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-10">
+                <h2>图表列表</h2>
+                <ol class="breadcrumb">
+                    <li>
+                        <a href="/admin/home">主页</a>
+                    </li>
+                    <li>
+                        <a>图表管理</a>
+                    </li>
+                    <li>
+                        <strong>合同总额</strong>
+                    </li>
+                </ol>
+            </div>
+            <div class="col-lg-2">
+
+            </div>
+
+        </div>
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="panel panel-headline">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Amount Chart</h3>
+                </div>
+                <div class="panel-body">
+                    <!-- 显示Echarts图表 -->
+                    <div style="height:400px;min-height:100px;margin:0 auto;" id="Amount"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--添加footer-->
+    <div class="footer fixed" th:insert="~{admin/partial/footer :: copyright}">
+
+    </div>
+</div>
+
+<!-- 修改用户信息 -->
+<div class="modal inmodal" id="addContractModal" tabindex="-1" role="dialog" aria-hidden="true"
+     th:replace="admin/partial/module-userinfo :: update-modal"></div>
+
+<div class="container" id="crop-avatar" th:replace="~{admin/partial/avatar :: avatar}"></div>
+
+<!-- Mainly scripts -->
+<script src="/js/jquery.min.js"></script>
+<script src="/admin/js/bootstrap.min.js"></script>
+<script src="/admin/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="/admin/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="/admin/js/validation.js"></script>
+<script src="/admin/js/charts/amount.js"></script>
+<!--左边菜单的展开和关闭-->
+<script src="/admin/js/hplus.js"></script>
+<script src="/admin/js/plugins/chosen/chosen.jquery.js"></script>
+<!--弹窗效果-->
+<script type="text/javascript" src="/admin/js/flavr/flavr/js/flavr.min.js"></script>
+<script type="text/javascript" src="/admin/js/flavr/base.js"></script>
+<!-- ECharts 核心 JS 文件 -->
+<script src="/admin/js/echarts.js" type="text/javascript"></script>
+
+<script src="/admin/js/userinfo.js"></script>
+<script src="/admin/js/cropper.min.js"></script>
+<script src="/admin/js/upload-image.js"></script>
+</body>
+</html>

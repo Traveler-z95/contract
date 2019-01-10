@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jinhui.contract.mapper.UserMapper">
+    <!--通过username获取user对象-->
+    <select id="getUserByUserName" parameterType="String" resultType="user">
+        SELECT *
+        FROM user
+        WHERE
+        user_name = #{userName}
+    </select>
+
+    <!--获取用户信息-->
+    <select id="getUserInfo" resultType="userInfo">
+        SELECT user_name,avatar,nick_name,phone,e_mail,signature,address
+        FROM user_info
+        WHERE
+        user_name = #{userName}
+    </select>
+
+    <update id="updatePassWord">
+        update user set pass_word = #{passWord} where user_name = #{userName}
+    </update>
+
+    <update id="updateUserInfo">
+        update user_info
+        set nick_name = #{nickName},phone = #{phone},e_mail = #{eMail},signature = #{signature},
+        address = #{address}
+        where user_name = #{userName}
+    </update>
+
+    <update id="updateAvatar">
+        update user_info set avatar = #{url} where user_name = #{userName}
+    </update>
+</mapper>

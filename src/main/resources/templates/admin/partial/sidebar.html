@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="zh">
+<body>
+<div class="sidebar-collapse" th:fragment="sidebar">
+    <ul class="nav" id="side-menu">
+
+        <li class="nav-header">
+            <div class="dropdown profile-element" id="sidebarUserHead">
+                <span><img alt="image" class="img-circle" th:src="${userInfo.avatar}"/>
+                      </span>
+                <a data-toggle="dropdown" class="dropdown-toggle" href="javascript:void(0)">
+                    <span class="clear">
+                        <span class="block m-t-xs">
+                            <strong class="font-bold">[[${userInfo.nickName}]]</strong>
+                        </span>
+                        <span class="text-muted text-xs block">
+                            设置
+                        <b class="caret"></b>
+                        </span>
+                    </span>
+                </a>
+                <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                    <li><a id="update-avatar">修改头像</a></li>
+                    <li><a id="update-password">修改密码</a></li>
+                    <li><a id="update-userinfo">个人资料</a></li>
+                    <!--<li><a id="update-connect">联系我们</a></li>-->
+                    <!--<li><a href="#">信箱</a></li>-->
+                    <li class="divider"></li>
+                    <li><a href="/admin/logout">安全退出</a></li>
+                </ul>
+            </div>
+            <div class="logo-element">
+                H+
+            </div>
+        </li>
+
+        <li id="index-manage-li">
+            <a href="javascript:void(0)"><i class="fa fa fa-plus-square"></i>
+                <span class="nav-label">功能管理</span>
+                <span class="fa arrow"></span>
+            </a>
+            <ul class="nav nav-second-level">
+                <li id="index-list-li">
+                    <a href="/admin/contract/index">功能列表</a>
+                </li>
+            </ul>
+        </li>
+
+        <li id="contract-manage-li">
+            <a href="javascript:void(0)"><i class="fa fa fa-plus-square"></i>
+                <span class="nav-label">合同管理</span>
+                <span class="fa arrow"></span>
+            </a>
+            <ul class="nav nav-second-level">
+                <li id="contract-list-li">
+                    <a href="/admin/contract/list">合同列表</a>
+                </li>
+            </ul>
+        </li>
+
+        <li id="charts-manage-li">
+            <a href="javascript:void(0)"><i class="fa fa fa-plus-square"></i>
+                <span class="nav-label">图表管理</span>
+                <span class="fa arrow"></span>
+            </a>
+            <ul class="nav nav-second-level">
+                <li id="charts-amount-li">
+                    <a href="/admin/charts/amount">合同总数</a>
+                </li>
+                <li id="charts-returned-li">
+                    <a href="/admin/charts/returned">回款情况</a>
+                </li>
+            </ul>
+        </li>
+
+    </ul>
+</div>
+
+
+</body>
+</html>

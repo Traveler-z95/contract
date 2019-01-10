@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="zh">
+<head th:replace="~{admin/partial/head :: head}"></head>
+
+<body>
+<div id="wrapper">
+    <nav class="navbar-default navbar-static-side" role="navigation" th:insert="~{admin/partial/sidebar :: sidebar}">
+    </nav>
+
+    <div id="page-wrapper" class="gray-bg dashbard-1">
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-10">
+                <h2>合同列表</h2>
+                <ol class="breadcrumb">
+                    <li>
+                        <a href="/admin/home">主页</a>
+                    </li>
+                    <li>
+                        <a>合同管理</a>
+                    </li>
+                    <li>
+                        <strong>合同列表</strong>
+                    </li>
+                </ol>
+            </div>
+            <div class="col-lg-2">
+
+            </div>
+        </div>
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-content">
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <div class="input-group m-b-xs">
+                                        <input type="text" id="contractSignYear" placeholder="请输入签署年度"
+                                               class="input-sm form-control" style="font-size: 12px;">
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="input-group m-b-xs">
+                                        <input type="text" id="itemCoding" placeholder="请输入项目编码"
+                                               class="input-sm form-control" style="font-size: 12px;">
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="input-group m-b-xs">
+                                        <input type="text" id="salePerson" placeholder="请输入销售人员"
+                                               class="input-sm form-control" style="font-size: 12px;">
+                                        <span class="input-group-btn">
+                                                   <button id="contract-search" type="button"
+                                                           class="btn btn-sm btn-primary">搜索</button>
+                                            </span>
+                                    </div>
+                                </div>
+                                <div style="float: left; margin-right: 15px;">
+                                    <button id="contract-add" type="button" data-toggle="modal" data-target="#contract-adds" class="btn btn-sm btn-danger m-b-xs">添加合同</button>
+                                </div>
+                                <div class="dropdown profile-element" style="float: left;">
+                                    <a data-toggle="dropdown" class="dropdown-toggle" href="javascript:void(0)">
+                                        <button id="contract-export" type="button" class="btn btn-sm btn-primary m-b-xs">导出合同&nbsp&nbsp<b class="caret"></b></button>
+                                    </a>
+                                    <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                                        <!--<li><a href="/admin/contract/exportAllContract">导出全部</a></li>-->
+                                        <li><a id="contract-export-all" onclick="exportAll()">导出全部</a></li>
+                                        <!--<li><a href="/admin/contract/exportCurrentContract">导出当前页</a></li>-->
+                                        <li><a id="contract-export-current" onclick="exportCurrent()">导出当前页</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="dataList" style="overflow: auto">
+
+                        </div>
+
+                        <br/>
+
+                        <div>
+                            <div style="float: left" class="pagination">共
+                                <span id="total-num"></span>
+                                条记录&nbsp;/
+                                当前第
+                                <span id="current-page"></span>
+                                页&nbsp;/
+                                共
+                                <span id="total-page"></span>
+                                页
+                            </div>
+
+
+                            <div id="pagination" class="pagination" style="float: right">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--添加footer-->
+    <div class="footer fixed" th:insert="~{admin/partial/footer :: copyright}">
+
+    </div>
+</div>
+
+<!-- 修改用户信息 -->
+<div class="modal inmodal" id="addContractModal" tabindex="-1" role="dialog" aria-hidden="true"
+     th:replace="admin/partial/module-userinfo :: update-modal"></div>
+
+<div class="container" id="crop-avatar" th:replace="~{admin/partial/avatar :: avatar}"></div>
+
+<!-- 新增弹出窗 -->
+<div class="modal fade" id="contract-adds" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true" style="display: none; padding-left: 17px;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"
+                                                                                                  style="font-size: 1.5vw;">×</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">合同信息</h4>
+            </div>
+            <div class="modal-body">
+                <div class="portlet-body form">
+                    <div>
+                        <form action="/admin/contract/add" id="contractAdd"
+                              class="form-horizontal ng-pristine ng-invalid ng-invalid-required" role="form"
+                              name="new_pwd_form">
+                            <div class="form-body">
+                                <div class="row" style="width: 660px;">
+                                    <div class="col-md-3" style="width: 280px;">
+                                        <div class="form-group" style="float: left">
+                                            <label class="control-label col-md-3" style="width: 135px;">合同签署年度 :</label>
+                                            <div class="col-md-3" style="float: left">
+                                                <input type="text" name="contractSignYear" class="form-control"
+                                                       style="width: 120px;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3" style="width: 280px;">
+                                        <div class="form-group" style="float: left">
+                                            <label class="control-label col-md-3" style="width: 135px;">项目编码 :</label>
+                                            <div class="col-md-3" style="float: left">
+                                                <input type="text" name="itemCoding" class="form-control"
+                                                       style="width: 120px;" required="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" style="width: 660px;">
+                                    <div class="col-md-3" style="width: 280px;">
+                                        <div class="form-group" style="float: left">
+                                            <label class="control-label col-md-3" style="width: 135px;">销售人员 :</label>
+                                            <div class="col-md-3" style="float: left">
+                                                <input type="text" name="salePerson" class="form-control"
+                                                       style="width: 120px;" required="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3" style="width: 280px;">
+                                        <div class="form-group" style="float: left">
+                                            <label class="control-label col-md-3" style="width: 135px;">项目名称 :</label>
+                                            <div class="col-md-3" style="float: left">
+                                                <input type="text" name="projectName" class="form-control"
+                                                       style="width: 120px;" required="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" style="width: 660px;">
+                                    <div class="col-md-3" style="width: 280px;">
+                                        <div class="form-group" style="float: left">
+                                            <label class="control-label col-md-3" style="width: 135px;">合同额 :</label>
+                                            <div class="col-md-3" style="float: left">
+                                                <input type="text" name="contractAmount" class="form-control"
+                                                       style="width: 120px;" required="">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row" style="width: 660px;">
+                                    <div class="col-md-3" style="width: 280px;">
+                                        <div class="form-group" style="float: left">
+                                            <label class="control-label col-md-3" style="width: 135px;">2015年开票金额
+                                                :</label>
+                                            <div class="col-md-3" style="float: left">
+                                                <input type="text" name="invoiceAmount2015" class="form-control"
+                                                       style="width: 120px;" required="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3" style="width: 280px;">
+                                        <div class="form-group" style="float: left">
+                                            <label class="control-label col-md-3" style="width: 135px;">2015年回款金额
+                                                :</label>
+                                            <div class="col-md-3" style="float: left">
+                                                <input type="text" name="recoveredAmount2015" class="form-control"
+                                                       style="width: 120px;" required="">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="row" style="width: 660px;">
+                                    <div class="col-md-3" style="width: 280px;">
+                                        <div class="form-group" style="float: left">
+                                            <label class="control-label col-md-3" style="width: 135px;">2016年开票金额
+                                                :</label>
+                                            <div class="col-md-3" style="float: left">
+                                                <input type="text" name="invoiceAmount2016" class="form-control"
+                                                       style="width: 120px;" required="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3" style="width: 280px;">
+                                        <div class="form-group" style="float: left">
+                                            <label class="control-label col-md-3" style="width: 135px;">2017年开票金额
+                                                :</label>
+                                            <div class="col-md-3" style="float: left">
+                                                <input type="text" name="invoiceAmount2017" class="form-control"
+                                                       style="width: 120px;" required="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row" style="width: 660px;">
+                                    <div class="col-md-3" style="width: 280px;">
+                                        <div class="form-group" style="float: left">
+                                            <label class="control-label col-md-3" style="width: 135px;">2016年回款日期
+                                                :</label>
+                                            <div class="col-md-3" style="float: left">
+                                                <input type="text" name="recoveredAmountDate2016" class="form-control"
+                                                       style="width: 120px;" required="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3" style="width: 280px;">
+                                        <div class="form-group" style="float: left">
+                                            <label class="control-label col-md-3" style="width: 135px;">2016年回款金额
+                                                :</label>
+                                            <div class="col-md-3" style="float: left">
+                                                <input type="text" name="recoveredAmount2016" class="form-control"
+                                                       style="width: 120px;" required="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row" style="width: 660px;">
+                                    <div class="col-md-3" style="width: 280px;">
+                                        <div class="form-group" style="float: left">
+                                            <label class="control-label col-md-3" style="width: 135px;">2017年回款日期
+                                                :</label>
+                                            <div class="col-md-3" style="float: left">
+                                                <input type="text" name="recoveredAmountDate2017" class="form-control"
+                                                       style="width: 120px;" required="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3" style="width: 280px;">
+                                        <div class="form-group" style="float: left">
+                                            <label class="control-label col-md-3" style="width: 135px;">2017年回款金额
+                                                :</label>
+                                            <div class="col-md-3" style="float: left">
+                                                <input type="text" name="recoveredAmount2017" class="form-control"
+                                                       style="width: 120px;" required="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" style="width: 660px;">
+                                    <div class="col-md-3" style="width: 280px;">
+                                        <div class="form-group" style="float: left">
+                                            <label class="control-label col-md-3" style="width: 135px;">2018年开票日期
+                                                :</label>
+                                            <div class="col-md-3" style="float: left">
+                                                <input type="text" name="invoiceAmountDate2018" class="form-control"
+                                                       style="width: 120px;" required="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3" style="width: 280px;">
+                                        <div class="form-group" style="float: left">
+                                            <label class="control-label col-md-3" style="width: 135px;">2018年开票金额
+                                                :</label>
+                                            <div class="col-md-3" style="float: left">
+                                                <input type="text" name="invoiceAmount2018" class="form-control"
+                                                       style="width: 120px;" required="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" style="width: 660px;">
+
+                                    <div class="col-md-3" style="width: 280px;">
+                                        <div class="form-group" style="float: left">
+                                            <label class="control-label col-md-3" style="width: 135px;">2018年回款日期
+                                                :</label>
+                                            <div class="col-md-3" style="float: left">
+                                                <input type="text" name="recoveredAmountDate2018" class="form-control"
+                                                       style="width: 120px;" required="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3" style="width: 280px;">
+                                        <div class="form-group" style="float: left">
+                                            <label class="control-label col-md-3" style="width: 135px;">2018年回款金额
+                                                :</label>
+                                            <div class="col-md-3" style="float: left">
+                                                <input type="text" name="recoveredAmount2018" class="form-control"
+                                                       style="width: 120px;" required="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" style="width: 660px;">
+
+                                    <div class="col-md-3" style="width: 280px;">
+                                        <div class="form-group" style="float: left">
+                                            <label class="control-label col-md-3" style="width: 135px;">开票应收款 :</label>
+                                            <div class="col-md-3" style="float: left">
+                                                <input type="text" name="due" class="form-control" style="width: 120px;"
+                                                       required="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3" style="width: 280px;">
+                                        <div class="form-group" style="float: left">
+                                            <label class="control-label col-md-3" style="width: 135px;">开票合计 :</label>
+                                            <div class="col-md-3" style="float: left">
+                                                <input type="text" name="invoiceAmount" class="form-control"
+                                                       style="width: 120px;" required="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" style="width: 660px;">
+
+                                    <div class="col-md-3" style="width: 280px;">
+                                        <div class="form-group" style="float: left">
+                                            <label class="control-label col-md-3" style="width: 135px;">未开票金额 :</label>
+                                            <div class="col-md-3" style="float: left">
+                                                <input type="text" name="unbilledAmount" class="form-control"
+                                                       style="width: 120px;" required="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3" style="width: 280px;">
+                                        <div class="form-group" style="float: left">
+                                            <label class="control-label col-md-3" style="width: 135px;">回款合计 :</label>
+                                            <div class="col-md-3" style="float: left">
+                                                <input type="text" name="receivableTotal" class="form-control"
+                                                       style="width: 120px;" required="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary"
+                        onclick="document.getElementById('contractAdd').submit();">确认
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal inmodal" id="contract-updates" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div id="updateContractContent" class="modal-body">
+
+        </div>
+    </div>
+</div>
+
+
+<!-- Mainly scripts -->
+<script src="/js/jquery.min.js"></script>
+<script src="/admin/js/bootstrap.min.js"></script>
+<script src="/admin/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="/admin/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="/admin/js/validation.js"></script>
+<script src="/admin/js/contract/contract.js"></script>
+<script src="/js/jqPaginator.min.js"></script>
+<!--左边菜单的展开和关闭-->
+<script src="/admin/js/hplus.js"></script>
+<script src="/admin/js/plugins/chosen/chosen.jquery.js"></script>
+<!--弹窗效果-->
+<script type="text/javascript" src="/admin/js/flavr/flavr/js/flavr.min.js"></script>
+<script type="text/javascript" src="/admin/js/flavr/base.js"></script>
+
+<script src="/admin/js/userinfo.js"></script>
+<script src="/admin/js/cropper.min.js"></script>
+<script src="/admin/js/upload-image.js"></script>
+</body>
+</html>

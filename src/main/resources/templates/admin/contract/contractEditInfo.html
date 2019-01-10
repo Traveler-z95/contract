@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="zh">
+<style>
+    fieldset{border:1px solid #1ab394; padding:10px;}
+    legend{display: block;
+        width: auto;
+        padding: 0;
+        margin-bottom: 0;
+        font-size: 14px;
+        color: #333;
+        border: none;
+    }
+
+    .input-upload{ position: relative;}
+    .input-upload input[type="file"]{ position: absolute; left: 0px; top: 0px; width: 72px; height: 35px; opacity:.0;filter:alpha(opacity=00);}
+
+</style>
+<form id="updateC" action="/admin/contract/update" method="post" class="form-horizontal">
+    <fieldset>
+        <legend>合同信息</legend>
+        <input id="contractId" name="contractId" th:value="${contract.contractId}" hidden>
+
+        <div class="form-group">
+            <label class="col-sm-4 control-label">合同签署年度</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="contractSignYear" name="contractSignYear" th:value="${contract.contractSignYear}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label">项目编码</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="itemCoding" name="itemCoding"  th:value="${contract.itemCoding}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label">销售人员</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="salePerson" name="salePerson"  th:value="${contract.salePerson}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label">项目名称</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="projectName" name="projectName" th:value="${contract.projectName}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label">合同额</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="contractAmount" name="contractAmount" th:value="${contract.contractAmount}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label">2015年开票金额</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="invoiceAmount2015" name="invoiceAmount2015" th:value="${contract.invoiceAmount2015}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label">2015年回款金额</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="recoveredAmount2015" name="recoveredAmount2015" th:value="${contract.recoveredAmount2015}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label">2016年开票金额</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="invoiceAmount2016" name="invoiceAmount2016" th:value="${contract.invoiceAmount2016}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label">2017年开票金额</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="invoiceAmount2017" name="invoiceAmount2017" th:value="${contract.invoiceAmount2017}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label">2016年回款日期</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="recoveredAmountDate2016" name="recoveredAmountDate2016" th:value="${contract.recoveredAmountDate2016}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label">2016年回款金额</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="recoveredAmount2016" name="recoveredAmount2016" th:value="${contract.recoveredAmount2016}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label">2017年回款日期</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="recoveredAmountDate2017" name="recoveredAmountDate2017" th:value="${contract.recoveredAmountDate2017}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label">2017年回款金额</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="recoveredAmount2017" name="recoveredAmount2017" th:value="${contract.recoveredAmount2017}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label">2018年开票日期</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="invoiceAmountDate2018" name="invoiceAmountDate2018" th:value="${contract.invoiceAmountDate2018}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label">2018年开票金额</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="invoiceAmount2018" name="invoiceAmount2018" th:value="${contract.invoiceAmount2018}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label">2018年回款日期</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="recoveredAmountDate2018" name="recoveredAmountDate2018" th:value="${contract.recoveredAmountDate2018}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label">2018年回款金额</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="recoveredAmount2018" name="recoveredAmount2018" th:value="${contract.recoveredAmount2018}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label">开票应收款</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="due" name="due" th:value="${contract.due}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label">开票合计</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="invoiceAmount" name="invoiceAmount" th:value="${contract.invoiceAmount}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label">未开票金额</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="unbilledAmount" name="unbilledAmount" th:value="${contract.unbilledAmount}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label">回款合计</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="receivableTotal" name="receivableTotal" th:value="${contract.receivableTotal}">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-4 col-sm-offset-4">
+                <button class="btn btn-primary" type="button" onclick="document.getElementById('updateC').submit();">更新</button>
+                <button class="btn btn-white" type="button" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </fieldset>
+</form>
+</html>

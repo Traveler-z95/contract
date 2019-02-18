@@ -41,7 +41,7 @@ public class AdminPageController {
         User user = (User) request.getSession().getAttribute("user");
         UserInfo userInfo = userService.getUserInfo(user.getUserName());
         model.addAttribute("userInfo",userInfo);
-        return "/admin/contract/index";
+        return "admin/contract/index";
     }
 
     /**

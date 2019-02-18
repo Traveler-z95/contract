@@ -19,9 +19,11 @@ public class WebSecurityAdapter extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
-        http.authorizeRequests().antMatchers("/","/login/**","/error/**").permitAll()
+        http.authorizeRequests()
+                .antMatchers("/static/**","/","/login/**","/error/**").permitAll()
                 .antMatchers("/admin/**").authenticated()
 //                .and().rememberMe().tokenValiditySeconds(3600)
+
                 .and().formLogin().loginPage("/login").defaultSuccessUrl("/admin/home").permitAll()
                 .and().logout().logoutUrl("/admin/logout").logoutSuccessUrl("/login").invalidateHttpSession(true).permitAll();
 

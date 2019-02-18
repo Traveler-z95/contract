@@ -12,7 +12,7 @@ public class PageController {
      * 跳转到登录页面
      * @return
      */
-    @RequestMapping("/login")
+    @RequestMapping("login")
     public String loginPage(HttpServletRequest request){
         User user = (User) request.getSession().getAttribute("user");
         if (user != null){

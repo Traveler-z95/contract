@@ -8,11 +8,9 @@ qiniu:
 #数据库连接配置
 spring:
   datasource:
-#    url: jdbc:mysql://localhost:3306/contract?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf8
-    url: jdbc:mysql://192.168.98.9:63306/contract?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf8
+    url: jdbc:mysql://localhost:3306/contract?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf8
     username: root
-#    password: 123456
-    password: jinhui12138
+    password: 123456
     driver-class-name: com.mysql.jdbc.Driver
 #    driver-class-name: com.mysql.cj.jdbc.Driver
 
